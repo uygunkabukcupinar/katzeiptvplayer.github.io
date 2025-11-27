@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - KATZE IP TV PLAYER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="images/Logo.png" alt="KATZE IP TV PLAYER Logo">
+            </div>
+            <h1>Contact Us</h1>
+            <p style="color: var(--text-secondary);">We'd love to hear from you!</p>
+        </header>
+
+        <main>
+            <div class="card" style="max-width: 700px; margin: 0 auto; padding: 40px;">
+                <form id="contactForm">
+
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" class="form-control" required placeholder=" ">
+                        <label for="name">Your Name *</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" class="form-control" required placeholder=" ">
+                        <label for="email">Email Address *</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="subject" name="subject" class="form-control" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="technical">Technical Support</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="account">Account Issue</option>
+                            <option value="feedback">General Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <label for="subject">Subject *</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="device" name="device" class="form-control" placeholder=" ">
+                        <label for="device">Device Information (Optional)</label>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="message" name="message" class="form-control" required placeholder=" "></textarea>
+                        <label for="message">Message *</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </main>
+
+        <nav class="nav-buttons">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="faq.html" class="nav-btn">FAQ</a>
+            <a href="terms.html" class="nav-btn">Terms of Service</a>
+            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
+        </nav>
+
+        <footer class="footer">
+            <p>&copy; 2025 KATZE IP TV PLAYER. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        (function () {
+            // Sizin Public Key'iniz:
+            emailjs.init({
+                publicKey: "GdrekV6TBLUagQlxb",
+            });
+        })();
+    </script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('contactForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Formun normal gönderimini engelle
+
+                const submitBtn = this.querySelector('.submit-btn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                // Sizin Service ID'niz:
+                const serviceID = 'service_9nvtyls';
+
+                // EmailJS panelinden (Email Templates) aldığınız Şablon ID'nizi BURAYA GİRİN:
+                const templateID = 'template_l6j3809'; // <-- BU KISMI DOLDURUN
+
+                // Formu gönder
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        // Başarılı olursa:
+                        submitBtn.textContent = 'Successfully Sent!';
+                        alert('Message sent successfully!');
+                        this.reset(); // Formu sıfırla
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send Message';
+                    }, (err) => {
+                        // Hata olursa:
+                        submitBtn.textContent = 'Send Message';
+                        submitBtn.disabled = false;
+                        alert('Message could not be sent. Error: ' + JSON.stringify(err));
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
